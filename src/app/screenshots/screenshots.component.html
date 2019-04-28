@@ -1,0 +1,6 @@
+
+<div>{{ screenshots.status }}</div>
+
+<div *ngFor='let screenshot of screenshots.screenshots | slice:0:10'> 
+  <div><a href="{{ screenshot.screenshotUris[0].uri }}"><img src="{{ screenshot.thumbnails[1].uri }}"/></a></div>
+</div>
