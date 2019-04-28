@@ -1,15 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { XboxapiService } from '../xboxapi.service';
+import { Gamer } from '../gamer';
+
 
 @Component({
-  selector: 'gamerdetails',
+  selector: 'gamer-details',
   templateUrl: './gamerdetails.component.html',
   styleUrls: ['./gamerdetails.component.css']
 })
 
-export class GamerDetailsComponent {
-  gamertag: String;
+export class GamerDetailsComponent implements OnInit {
+  @Input() gamer: Gamer;
+  gamertag: string;
 
-  constructor() {
-    this.gamertag = "RealAngryMonkey";
+  constructor(
+    private xboxApiService: XboxapiService,
+  ) { }
+
+  ngOnInit() {
+    this.getFormattedGamertag();
+  }
+
+  getFormattedGamertag() {
+    this.gamertag = "test";
+    //return this.gamer.gamertag;
   }
 }

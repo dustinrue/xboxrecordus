@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { XboxapiService } from '../xboxapi.service';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService } from '../message.service';
-import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Component({
   selector: 'gameclips',
@@ -12,14 +12,20 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 export class GameClipsComponent implements OnInit {
   gameclips: Array<number>;
   error: Object;
-  constructor(private xboxApiService: XboxapiService, private messageService: MessageService) { }
+  constructor(
+    private xboxApiService: XboxapiService,
+    private route: ActivatedRoute,
+    private messageService: MessageService
+  ) { }
 
   ngOnInit() {
-    //this.getGameClips();
+    this.getGameClips();
   }
 
   getGameClips(): void {
-    this.xboxApiService.getGameClips()
+    const gamertag = this.route.snapshot.paramMap.get('gamertag');
+
+    this.xboxApiService.getGameClips(gamertag)
     .subscribe(gameclips => this.gameclips = gameclips);
   }
 

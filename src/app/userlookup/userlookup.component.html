@@ -1,0 +1,8 @@
+<div>
+    <input #gamertagSearchBox (keyup.enter)="lookupGamertag(gamertagSearchBox.value)" placeholder="Gamertag" type="text" name="gamertag" value="" size="30" maxlength="128">
+    <button (click)="lookupGamertag(gamertagSearchBox.value)" name="op" value="Submit">Submit</button>
+</div>
+
+<div *ngIf="formattedGamertag">
+  Welcome {{ formattedGamertag }}!
+</div>

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { XboxapiService } from '../xboxapi.service';
+import { ActivatedRoute, Router, NavigationEnd, RouterEvent } from '@angular/router';
 import { MessageService } from '../message.service';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'screenshots',
@@ -11,28 +10,41 @@ import { Location } from '@angular/common';
 })
 
 export class ScreenshotsComponent implements OnInit {
-
-
   screenshots: Array<number>;
   error: Object;
+
   constructor(
     private xboxApiService: XboxapiService, 
-    private messageService: MessageService,
     private route: ActivatedRoute,
-    private location: Location
-  ) { }
+    private router: Router,
+    private messageService: MessageService,
+  ) {
+    this.router.events.subscribe((event:RouterEvent) => {
+      this.routerUpdated(event);
+    });
+  }
 
   ngOnInit() {
     this.getScreenshots();
   }
 
-  getScreenshots(): void {
-    const gamertag = this.route.snapshot.paramMap.get('gamertag');
-    console.log(gamertag);
-    if (gamertag) {
-      this.xboxApiService.getScreenshots(gamertag)
-      .subscribe(screenshots => this.screenshots = screenshots);
+  routerUpdated(event: RouterEvent) {
+    if (event instanceof NavigationEnd) {
+      this.getScreenshots();
     }
+  }
+
+  getScreenshots(): void {
+    console.log(`Getting screenshots for ${this.route.snapshot.paramMap.get('gamertag')}`);
+    const gamertag = this.route.snapshot.paramMap.get('gamertag');
     
+    if (gamertag) {
+      this.messageService.add('Waiting on Xbox Live...');
+      this.xboxApiService.getScreenshots(gamertag)
+      .subscribe(screenshots => {
+        this.messageService.add('Idle');
+        this.screenshots = screenshots;
+      });
+    }
   }
 }

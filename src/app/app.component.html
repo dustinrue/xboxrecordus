@@ -1,18 +1,13 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <header>
   <div class="container">
-    <div><img src="/assets/logo.png"></div>
-    <div>xboxrecord.us</div>
+    <div><a routerLink="/"><img src="/assets/logo.png"></a></div>
+    <div>{{ title }}</div>
   </div>
   
-  <form class="form-inline" action="/" method="post" id="xbox-live-client-user-search-form" accept-charset="UTF-8"><div><div class="form-item form-item-gamertag form-type-textfield form-group"><input placeholder="Gamertag" class="form-control form-text" type="text" id="edit-gamertag" name="gamertag" value="" size="30" maxlength="128"></div><button class="btn btn-primary form-submit" type="submit" id="edit-submit" name="op" value="Submit">Submit</button>
-    <input type="hidden" name="form_build_id" value="form-hVuhQXTnhze1i_EojI8mbDT-3RXeVOlcbr_jN77RTlc">
-    <input type="hidden" name="form_id" value="xbox_live_client_user_search_form">
-    </div></form>
+<app-userlookup></app-userlookup>
+  
 </header>
-<div class="gamerdetails"><gamerdetails></gamerdetails></div>
-<div class="gameclips"><gameclips></gameclips></div>
+<gamer-details></gamer-details>
 <div><app-messages></app-messages></div>
-<div><screenshots></screenshots></div>
-
-
+<div><router-outlet></router-outlet></div>
