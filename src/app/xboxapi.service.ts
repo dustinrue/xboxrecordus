@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient }    from '@angular/common/http';
+import { environment } from '../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class XboxapiService {
-  private apiUrl = "https://xboxapi.k8s.dustinrue.com";
+  private apiUrl = environment.apiUrl;
 
   constructor(
     private http: HttpClient,
