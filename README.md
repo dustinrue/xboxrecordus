@@ -29,3 +29,6 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 ## A note about the data source
 
 Data is being pulled from a local store right now. You need to edit src/app/xboxapi.service.ts file and change the URLs to api.xboxrecord.us.
+
+## Building for github pages
+`ng build --prod --output-path docs --base-href /xboxrecordus/`
